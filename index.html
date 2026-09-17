@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>KubeDeploy | DevOps Project</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #07111f;
+    color: white;
+    min-height: 100vh;
+}
+
+nav {
+    height: 55px;
+    padding: 0 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #091524;
+    border-bottom: 1px solid #1d2c3e;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.logo span {
+    color: #58a6ff;
+}
+
+.cluster-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #76e69a;
+    font-size: 13px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #39d875;
+    box-shadow: 0 0 8px #39d875;
+}
+
+main {
+    width: 88%;
+    max-width: 1150px;
+    margin: auto;
+    padding: 25px 0 15px;
+}
+
+.hero {
+    text-align: center;
+}
+
+.badge {
+    display: inline-block;
+    padding: 5px 12px;
+    background: #0c2037;
+    border: 1px solid #284c72;
+    color: #74b9ff;
+    border-radius: 20px;
+    font-size: 11px;
+    margin-bottom: 10px;
+}
+
+.hero h1 {
+    font-size: 34px;
+    line-height: 1.15;
+    margin-bottom: 8px;
+}
+
+.hero h1 span {
+    color: #58a6ff;
+}
+
+.hero p {
+    max-width: 720px;
+    margin: auto;
+    color: #96a7ba;
+    line-height: 1.5;
+    font-size: 13px;
+}
+
+.status-panel {
+    margin-top: 20px;
+    padding: 18px;
+    background: #0b1726;
+    border: 1px solid #1d3046;
+    border-radius: 12px;
+}
+
+.panel-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.panel-top h2 {
+    font-size: 17px;
+}
+
+.healthy {
+    padding: 5px 11px;
+    background: #0d3823;
+    color: #63e895;
+    border-radius: 15px;
+    font-size: 11px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.card {
+    padding: 13px 15px;
+    background: #0e1d2e;
+    border: 1px solid #20364d;
+    border-radius: 9px;
+}
+
+.card p {
+    color: #8193a7;
+    font-size: 10px;
+    margin-bottom: 5px;
+}
+
+.card h3 {
+    font-size: 16px;
+}
+
+.running {
+    color: #5ce38b;
+}
+
+.section-title {
+    text-align: center;
+    margin: 18px 0 10px;
+}
+
+.section-title h2 {
+    font-size: 19px;
+}
+
+.section-title p {
+    color: #8294a8;
+    font-size: 11px;
+    margin-top: 3px;
+}
+
+.flow {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.flow-item {
+    padding: 12px 6px;
+    text-align: center;
+    background: #0c1b2c;
+    border: 1px solid #203850;
+    border-radius: 9px;
+}
+
+.icon {
+    font-size: 20px;
+    color: #67adff;
+    margin-bottom: 4px;
+}
+
+.flow-item h3 {
+    font-size: 13px;
+    margin-bottom: 2px;
+}
+
+.flow-item p {
+    font-size: 10px;
+    color: #8193a7;
+}
+
+.tech-stack {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tech {
+    padding: 6px 12px;
+    background: #102238;
+    border: 1px solid #25415f;
+    color: #b8d8ff;
+    border-radius: 6px;
+    font-size: 11px;
+}
+
+footer {
+    text-align: center;
+    color: #5f7288;
+    font-size: 10px;
+    margin-top: 16px;
+}
+
+@media (max-width: 750px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .flow {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero h1 {
+        font-size: 27px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">Kube<span>Deploy</span></div>
+
+    <div class="cluster-status">
+        <div class="dot"></div>
+        Cluster Online
+    </div>
+</nav>
+
+<main>
+
+    <section class="hero">
+
+        <div class="badge">DEVOPS INTERNSHIP PROJECT</div>
+
+        <h1>
+            Containerized Application
+            <span>Deployed with Kubernetes</span>
+        </h1>
+
+        <p>
+            A Dockerized web application deployed on a local Kubernetes
+            cluster using Minikube, managed through kubectl and exposed
+            through a NodePort Service.
+        </p>
+
+    </section>
+
+    <section class="status-panel">
+
+        <div class="panel-top">
+            <h2>Deployment Overview</h2>
+            <div class="healthy">● Healthy</div>
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <p>CLUSTER</p>
+                <h3>Minikube</h3>
+            </div>
+
+            <div class="card">
+                <p>APPLICATION</p>
+                <h3 class="running">Running</h3>
+            </div>
+
+            <div class="card">
+                <p>CONTAINER</p>
+                <h3>Nginx</h3>
+            </div>
+
+            <div class="card">
+                <p>SERVICE TYPE</p>
+                <h3>NodePort</h3>
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="section-title">
+        <h2>Deployment Workflow</h2>
+        <p>From source code to a running Kubernetes workload</p>
+    </div>
+
+    <section class="flow">
+
+        <div class="flow-item">
+            <div class="icon">&lt;/&gt;</div>
+            <h3>Source Code</h3>
+            <p>HTML & CSS</p>
+        </div>
+
+        <div class="flow-item">
+            <div class="icon">▣</div>
+            <h3>Docker Image</h3>
+            <p>Nginx Alpine</p>
+        </div>
+
+        <div class="flow-item">
+            <div class="icon">☸</div>
+            <h3>Kubernetes</h3>
+            <p>Deployment</p>
+        </div>
+
+        <div class="flow-item">
+            <div class="icon">◇</div>
+            <h3>Service</h3>
+            <p>NodePort</p>
+        </div>
+
+        <div class="flow-item">
+            <div class="icon">✓</div>
+            <h3>Application</h3>
+            <p>Running</p>
+        </div>
+
+    </section>
+
+    <div class="section-title">
+        <h2>Technology Stack</h2>
+    </div>
+
+    <section class="tech-stack">
+        <div class="tech">Docker</div>
+        <div class="tech">Kubernetes</div>
+        <div class="tech">Minikube</div>
+        <div class="tech">kubectl</div>
+        <div class="tech">Nginx</div>
+        <div class="tech">YAML</div>
+        <div class="tech">NodePort</div>
+    </section>
+
+    <footer>
+        Kubernetes Deployment • DevOps Internship Project
+    </footer>
+
+</main>
+
+</body>
+</html>
