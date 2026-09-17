@@ -1,272 +1,255 @@
-# Kubernetes Deployment using Minikube
+# ☸️ Kubernetes DevOps Project
 
-A DevOps internship project demonstrating how to containerize a web application using Docker and deploy it on a local Kubernetes cluster using Minikube and kubectl.
-
-The application runs inside Nginx containers managed by a Kubernetes Deployment with **2 replicas** and is exposed using a **NodePort Service**.
+A simple Dockerized web application deployed on a local Kubernetes cluster using **Docker, Kubernetes, Minikube, kubectl, Deployments, Pods, and NodePort Service**.
 
 ---
 
-## Project Overview
+## 📌 Project Overview
 
-This project demonstrates a complete local Kubernetes deployment workflow.
+This project demonstrates how a web application can be containerized using Docker and deployed on a Kubernetes cluster.
 
-The web application is first packaged into a Docker image. The Docker image is then loaded into Minikube and deployed to Kubernetes using a Deployment YAML file.
-
-Kubernetes maintains two running Pods for the application, while a NodePort Service makes the application accessible from the browser.
-
-### Deployment Flow
-
-```text
-HTML/CSS Web Application
-        ↓
-     Dockerfile
-        ↓
-    Docker Image
-        ↓
-      Minikube
-        ↓
-Kubernetes Deployment
-        ↓
-    2 Running Pods
-        ↓
- NodePort Service
-        ↓
- Web Application
-```
+The application runs inside Docker containers managed by Kubernetes. Minikube is used to create the local Kubernetes cluster, while a NodePort Service is used to access the application from the browser.
 
 ---
 
-## Technologies Used
+## 🛠️ Technologies Used
 
+- HTML
 - Docker
 - Kubernetes
 - Minikube
 - kubectl
 - Nginx
 - YAML
-- HTML & CSS
-- NodePort Service
+- Git
+- GitHub
+- VS Code
 
 ---
 
-## Project Structure
+## 📂 Project Structure
 
 ```text
 kubernetes-devops-project/
 │
-├── Documents/
-│   ├── 01-kubernetes-cluster-ready.png
-│   ├── 02-kubernetes-pods-running.png
-│   ├── 03-kubernetes-application-running.png
-│   └── 04-kubernetes-final-status.png
-│
 ├── Dockerfile
-├── deployment.yaml
 ├── index.html
+├── deployment.yaml
 ├── service.yaml
-└── README.md
+├── README.md
+│
+└── Documents/
+    └── Documents/
+        ├── 01-kubernetes-cluster-ready.png
+        ├── 02-kubernetes-pods-running.png
+        ├── 03-kubernetes-application-running.png
+        └── 04-kubernetes-final-status.png
 ```
 
 ---
 
-## Step 1 — Start Minikube
+## 🐳 Docker Containerization
 
-Start the local Kubernetes cluster using Docker as the driver.
+The web application is packaged inside a Docker container.
+
+The Dockerfile uses **Nginx** as the web server and copies the `index.html` file into the Nginx web directory.
+
+This makes the application portable and allows it to run consistently inside containers.
+
+---
+
+## ☸️ Kubernetes Deployment
+
+Kubernetes is used to deploy and manage the Dockerized application.
+
+The `deployment.yaml` file defines:
+
+- Application Deployment
+- Container image
+- Container port
+- Number of replicas
+- CPU resource requests and limits
+- Memory resource requests and limits
+
+The project uses **2 replicas**, which means Kubernetes runs two Pods of the application.
+
+---
+
+## 🌐 Kubernetes Service
+
+The `service.yaml` file creates a **NodePort Service**.
+
+The NodePort Service exposes the application outside the Kubernetes cluster so that it can be accessed from a web browser.
+
+### Application Flow
+
+```text
+User
+  ↓
+Browser
+  ↓
+NodePort Service
+  ↓
+Kubernetes Deployment
+  ↓
+Pods
+  ↓
+Docker Container
+  ↓
+Nginx Web Server
+  ↓
+Web Application
+```
+
+---
+
+## 🚀 Deployment Steps
+
+### 1. Start Minikube
 
 ```bash
 minikube start --driver=docker
 ```
 
-Verify the cluster:
+### 2. Check Kubernetes Cluster
 
 ```bash
-minikube status
+kubectl get nodes
 ```
 
-### Minikube Cluster Running
-
-![Minikube Cluster](Documents/01-kubernetes-cluster-ready.png)
-
----
-
-## Step 2 — Build the Docker Image
-
-Build the application image using the Dockerfile.
-
-```bash
-docker build -t kubernetes-devops-app:v2 .
-```
-
-The application uses Nginx to serve the static web page.
-
----
-
-## Step 3 — Load the Image into Minikube
-
-Because this project uses a locally built Docker image, load it into Minikube:
-
-```bash
-minikube image load kubernetes-devops-app:v2
-```
-
-Verify the image:
-
-```bash
-minikube image ls
-```
-
----
-
-## Step 4 — Deploy to Kubernetes
-
-Apply the Kubernetes Deployment:
+### 3. Apply Kubernetes Deployment
 
 ```bash
 kubectl apply -f deployment.yaml
 ```
 
-The Deployment maintains **2 replicas** of the application.
-
-Verify the Deployment:
-
-```bash
-kubectl get deployments
-```
-
-Check the Pods:
+### 4. Check Running Pods
 
 ```bash
 kubectl get pods
 ```
 
-### Kubernetes Pods Running
-
-![Kubernetes Pods](Documents/02-kubernetes-pods-running.png)
-
----
-
-## Step 5 — Create the NodePort Service
-
-Deploy the Kubernetes Service:
+### 5. Create Kubernetes Service
 
 ```bash
 kubectl apply -f service.yaml
 ```
 
-Verify it:
+### 6. Check Service
 
 ```bash
 kubectl get services
 ```
 
-The application uses:
-
-```text
-Service Type : NodePort
-Service Port : 80
-Target Port  : 80
-NodePort     : 30080
-```
-
----
-
-## Step 6 — Access the Application
-
-Open the application through the Minikube Service:
+### 7. Open Application
 
 ```bash
 minikube service kubernetes-devops-service
 ```
 
-### Application Running through Kubernetes
+---
 
-![Application Running](Documents/03-kubernetes-application-running.png)
+# 📸 Project Screenshots
+
+## 1️⃣ Kubernetes Cluster Ready
+
+The Minikube Kubernetes cluster was successfully created and the control plane was ready.
+
+![Kubernetes Cluster Ready](Documents/Documents/01-kubernetes-cluster-ready.png)
 
 ---
 
-## Final Kubernetes Status
+## 2️⃣ Kubernetes Pods Running
 
-The final setup contains:
+The application was deployed with **2 replicas**.
 
-- 1 Kubernetes Deployment
-- 2 application Pods
-- Nginx containerized web application
-- NodePort Service
-- CPU and memory resource requests and limits
-- Local Minikube cluster
+Both Kubernetes Pods are running successfully with **READY 1/1** status.
 
-Useful verification commands:
-
-```bash
-kubectl get deployments
-kubectl get pods
-kubectl get services
-```
-
-### Deployment, Pods and Service
-
-![Final Kubernetes Status](Documents/04-kubernetes-final-status.png)
+![Kubernetes Pods Running](Documents/Documents/02-kubernetes-pods-running.png)
 
 ---
 
-## Kubernetes Configuration
+## 3️⃣ Application Running on Kubernetes
 
-### Deployment
+The Dockerized web application was successfully deployed and accessed through the Kubernetes NodePort Service.
 
-The `deployment.yaml` file defines:
+![Kubernetes Application Running](Documents/Documents/03-kubernetes-application-running.png)
 
-- Application container
-- Docker image
-- 2 replicas
-- Container port 80
-- CPU requests and limits
-- Memory requests and limits
+---
 
-Kubernetes automatically maintains the desired number of Pods defined by the Deployment.
+## 4️⃣ Final Kubernetes Deployment Status
 
-### Service
+The final status verifies that the Kubernetes Deployment, Pods, and Service are running successfully.
 
-The `service.yaml` file creates a NodePort Service.
+![Final Kubernetes Status](Documents/Documents/04-kubernetes-final-status.png)
 
-It forwards traffic from:
+---
+
+## 🔄 DevOps Workflow
 
 ```text
-NodePort 30080
+Web Application
       ↓
-Service Port 80
+Docker Image
       ↓
-Pod / Container Port 80
+Kubernetes Deployment
       ↓
-Nginx Web Application
+Replica Pods
+      ↓
+NodePort Service
+      ↓
+Application Access
 ```
 
 ---
 
-## What I Learned
+## ✨ Key Features
 
-Through this project, I gained hands-on experience with:
+- Dockerized web application
+- Local Kubernetes cluster using Minikube
+- Kubernetes Deployment
+- 2 Pod replicas
+- NodePort Service
+- Nginx web server
+- CPU and memory resource configuration
+- Kubernetes YAML configuration
+- Container orchestration
+- Application accessible through browser
 
-- Creating Docker images
-- Running containerized applications
-- Understanding Kubernetes Pods
-- Creating Kubernetes Deployments
-- Managing multiple replicas
-- Writing Kubernetes YAML manifests
-- Using kubectl commands
+---
+
+## 🎯 What I Learned
+
+Through this project, I gained practical experience with:
+
+- Creating Docker containers
+- Understanding Docker images
+- Creating a Kubernetes cluster using Minikube
+- Deploying applications using Kubernetes
+- Working with Pods and Deployments
+- Running multiple replicas
 - Creating Kubernetes Services
-- Exposing applications using NodePort
-- Running Kubernetes locally using Minikube
-- Configuring basic container CPU and memory resources
-- Verifying and troubleshooting Kubernetes workloads
+- Using NodePort to expose applications
+- Writing Kubernetes YAML files
+- Using kubectl commands
+- Managing containerized applications
 
 ---
 
-## Project Goal
-
-The main goal of this project was to gain practical experience with **container orchestration and Kubernetes deployment concepts** by deploying a Dockerized application on a local Kubernetes cluster.
-
----
-
-## Author
+## 👨‍💻 Author
 
 **Shreyansh Singh**
+
+Computer Engineering Student  
+Cloud Computing & DevOps Enthusiast
+
+---
+
+## 📌 Project Status
+
+✅ Docker Image Created  
+✅ Minikube Cluster Running  
+✅ Kubernetes Deployment Created  
+✅ 2 Pods Running  
+✅ NodePort Service Created  
+✅ Application Successfully Running
